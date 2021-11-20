@@ -1,0 +1,50 @@
+{
+    "name": "web3-php/web3",
+    "description": "A skeleton repository for my packages",
+    "keywords": ["php", "skeleton", "package"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nuno Maduro",
+            "email": "enunomaduro@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.4.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.3.2",
+        "mockery/mockery": "^1.4.4",
+        "pestphp/pest": "^1.21.0",
+        "phpstan/phpstan": "^1.2.0",
+        "symfony/var-dumper": "^5.3.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Web3\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "lint": "php-cs-fixer fix -v",
+        "test:lint": "php-cs-fixer fix -v --dry-run",
+        "test:types": "phpstan analyse --ansi",
+        "test:unit": "pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    }
+}

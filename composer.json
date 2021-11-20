@@ -1,6 +1,6 @@
 {
     "name": "web3-php/web3",
-    "description": "An Ethereum PHP API Client which connects to the Generic JSON-RPC spec.",
+    "description": "Web3 PHP is a supercharged PHP API client that allows you to interact with a generic Ethereum RPC.",
     "keywords": ["php", "web3", "ethereum", "json-rpc", "api", "client"],
     "license": "MIT",
     "authors": [

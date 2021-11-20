@@ -11,4 +11,6 @@
 ------
 **Web3 PHP** is a supercharged PHP API client that allows you to interact with a generic Ethereum RPC.
 
+> This project is a work-in-progress. Code and documentation are currently under development and are subject to change.
+
 Web3 PHP is an open-sourced software licensed under the **[MIT license](https://opensource.org/licenses/MIT)**.

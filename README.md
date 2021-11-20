@@ -1,6 +1,14 @@
-```php
-use Web3\Web3;
+<p align="center">
+    <img src="https://raw.githubusercontent.com/web3-php/art/master/editor-without-bg.png" width="600" alt="PEST">
+    <p align="center">
+        <a href="https://github.com/web3-php/web/actions"><img alt="GitHub Workflow Status (master)" src="https://img.shields.io/github/workflow/status/web3-php/web/Tests/master"></a>
+        <a href="https://packagist.org/packages/web3-php/web3"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/web3-php/web3"></a>
+        <a href="https://packagist.org/packages/web3-php/web3"><img alt="Latest Version" src="https://img.shields.io/packagist/v/web3-php/web3"></a>
+        <a href="https://packagist.org/packages/web3-php/web3"><img alt="License" src="https://img.shields.io/packagist/l/web3-php/web3"></a>
+    </p>
+</p>
 
-$web3 = new Web3('http://localhost:8546');
-$accounts = $web3->eth()->accounts(); // ['0x407d73d8a49eeb85d32cf465507dd71d507100c1']
-```
+------
+**Web3 PHP** is a supercharged PHP API client that allows you to interact with a generic Ethereum RPC.
+
+Web3 PHP is an open-sourced software licensed under the **[MIT license](https://opensource.org/licenses/MIT)**.

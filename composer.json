@@ -1,7 +1,7 @@
 {
     "name": "web3-php/web3",
     "description": "An Ethereum PHP API Client which connects to the Generic JSON-RPC spec.",
-    "keywords": ["php", "skeleton", "package"],
+    "keywords": ["php", "web3", "ethereum", "json-rpc", "api", "client"],
     "license": "MIT",
     "authors": [
         {

@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/web3-php/art/master/editor-without-bg.png" width="600" alt="PEST">
+    <img src="https://raw.githubusercontent.com/web3-php/art/master/editor-without-bg.png" width="600" alt="Web3 PHP">
     <p align="center">
         <a href="https://github.com/web3-php/web3/actions"><img alt="GitHub Workflow Status (master)" src="https://img.shields.io/github/workflow/status/web3-php/web/Tests/master"></a>
         <a href="https://packagist.org/packages/web3-php/web3"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/web3-php/web3"></a>

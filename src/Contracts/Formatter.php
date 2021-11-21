@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Web3\Contracts;
 
 /**
- * @template TValue
+ * @template TArgumentValue
+ * @template TReturnValue
  *
- * @method static TValue format(TValue $value)
+ * @method static TReturnValue format(TArgumentValue $value)
  *
  * @internal
  */

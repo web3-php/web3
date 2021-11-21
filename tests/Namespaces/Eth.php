@@ -21,5 +21,5 @@ it('can make requests', function () {
     expect($this->eth->getBalance([
         '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
         'latest',
-    ]))->toBe('158972490234375000');
+    ])->toWei())->toBe('158972490234375000');
 });

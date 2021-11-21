@@ -9,7 +9,7 @@ use Web3\Contracts\Formatter;
 /**
  * @internal
  *
- * @implements Formatter<string>
+ * @implements Formatter<string, string>
  */
 final class HexToIntOrFloat implements Formatter
 {

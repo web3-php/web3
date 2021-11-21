@@ -28,10 +28,8 @@ trait Requestable
      * @param array<int, array<string, string>> $params
      *
      * @throws ErrorException|TransporterException
-     *
-     * @return array<array-key, mixed>|string|bool
      */
-    public function __call(string $method, array $params = []): array|string|bool
+    public function __call(string $method, array $params = []): mixed
     {
         if (array_key_exists(0, $params) && is_array($params[0])) {
             $params = $params[0];
@@ -41,7 +39,7 @@ trait Requestable
             foreach ($params as $number => $param) {
                 if (array_key_exists($number, $this::$api[$method][0])) {
                     foreach ($this::$api[$method][0][$number] as $formatter) {
-                        /* @var Formatter<array<array-key, mixed>|string|bool> $formatter */
+                        /* @var Formatter<mixed, mixed> $formatter */
                         $params[$number] = $formatter::format($param);
                     }
                 }
@@ -56,7 +54,7 @@ trait Requestable
         if (array_key_exists($method, $this::$api)
             && array_key_exists(1, $this::$api[$method])) {
             foreach ($this::$api[$method][1] as $formatter) {
-                /** @var Formatter<array<array-key, mixed>|string|bool> $formatter */
+                /** @var Formatter<mixed, mixed> $formatter */
                 $result = $formatter::format($result);
             }
         }

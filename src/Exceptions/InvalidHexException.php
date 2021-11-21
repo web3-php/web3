@@ -6,7 +6,7 @@ namespace Web3\Exceptions;
 
 use InvalidArgumentException;
 
-final class InvalidUrlException extends InvalidArgumentException
+final class InvalidHexException extends InvalidArgumentException
 {
     // ..
 }

@@ -6,6 +6,8 @@ namespace Web3\Namespaces;
 
 use Web3\Concerns\Requestable;
 use Web3\Formatters\HexToIntOrFloat;
+use Web3\Formatters\HexToWei;
+use Web3\ValueObjects\Wei;
 
 /**
  * @method string     protocolVersion()
@@ -13,10 +15,10 @@ use Web3\Formatters\HexToIntOrFloat;
  * @method string     coinbase()
  * @method bool       mining()
  * @method string     hashrate()
- * @method string     gasPrice()
+ * @method Wei        gasPrice()
  * @method array      accounts()
  * @method string     blockNumber()
- * @method string     getBalance(array $params)
+ * @method Wei        getBalance(array $params)
  * @method string     getStorageAt(array $params)
  * @method string     getTransactionCount(array $params)
  * @method string     getBlockTransactionCountByHash(array $params)
@@ -105,7 +107,7 @@ final class Eth
         ],
         'getBalance' => [
             [],
-            [HexToIntOrFloat::class],
+            [HexToWei::class],
         ],
         'getStorageAt' => [
             [],

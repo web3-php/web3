@@ -30,6 +30,7 @@ final class Http implements Transporter
     {
         $body = (string) json_encode([
             'jsonrpc' => '2.0',
+            'id'      => '1',
             'method'  => $method,
             'params'  => $params,
         ]);

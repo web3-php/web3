@@ -5,20 +5,28 @@ declare(strict_types=1);
 namespace Web3\Namespaces;
 
 use Web3\Concerns\Requestable;
+use Web3\Formatters\ArrayToTransactionCall;
 use Web3\Formatters\HexToIntOrFloat;
 use Web3\Formatters\HexToWei;
 use Web3\ValueObjects\Wei;
 
 /**
+ * @method array  accounts()
+ * @method string blockNumber()
+ * @method string call(array $params)
+ * @method string chainIn()
+ * @method string estimateGas(array $params)
+ * @method Wei    gasPrice()
+ * @method Wei    getBalance(array $params)
+ * @method array  getBlockByHash(array $params)
+ * @method array  getBlockByNumber(array $params)
+ *
+ * // --
  * @method string     protocolVersion()
  * @method array|bool syncing()
  * @method string     coinbase()
  * @method bool       mining()
  * @method string     hashrate()
- * @method Wei        gasPrice()
- * @method array      accounts()
- * @method string     blockNumber()
- * @method Wei        getBalance(array $params)
  * @method string     getStorageAt(array $params)
  * @method string     getTransactionCount(array $params)
  * @method string     getBlockTransactionCountByHash(array $params)
@@ -30,10 +38,6 @@ use Web3\ValueObjects\Wei;
  * @method string     signTransaction(array $params)
  * @method string     sendTransaction(array $params)
  * @method string     sendRawTransaction(array $params)
- * @method string     call(array $params)
- * @method string     estimateGas(array $params)
- * @method array      getBlockByHash(array $params)
- * @method array      getBlockByNumber(array $params)
  * @method array      getTransactionByHash(array $params)
  * @method array      getTransactionByBlockHashAndIndex(array $params)
  * @method array      getTransactionByBlockNumberAndIndex(array $params)
@@ -65,10 +69,46 @@ final class Eth
      * The Namespace Formatters API.
      *
      * @var array<string, array{0: array<int, array<int, class-string>>, 1: array<int, class-string>}>
-     *
-     * @todo https://github.com/ChainSafe/web3.js/blob/a1c7d71973ec17f9287fbea8939e64a80e589fc6/packages/web3-eth/src/index.js#L369
      */
     private static array $api = [
+        'accounts' => [
+            [],
+            [],
+        ],
+        'blockNumber' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'call' => [
+            [[ArrayToTransactionCall::class]],
+            [],
+        ],
+        'chainIn' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'estimateGas' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'gasPrice' => [
+            [],
+            [HexToWei::class],
+        ],
+        'getBalance' => [
+            [],
+            [HexToWei::class],
+        ],
+        'getBlockTransactionCountByHash' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getBlockTransactionCountByNumber' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+
+        // --
         'protocolVersion' => [
             [],
             [],
@@ -89,25 +129,9 @@ final class Eth
             [],
             [],
         ],
-        'gasPrice' => [
-            [],
-            [HexToWei::class],
-        ],
         'feeHistory' => [
             [],
             [],
-        ],
-        'accounts' => [
-            [],
-            [],
-        ],
-        'blockNumber' => [
-            [],
-            [HexToIntOrFloat::class],
-        ],
-        'getBalance' => [
-            [],
-            [HexToWei::class],
         ],
         'getStorageAt' => [
             [],
@@ -129,14 +153,7 @@ final class Eth
             [],
             [HexToIntOrFloat::class],
         ],
-        'getBlockTransactionCountByHash' => [
-            [],
-            [HexToIntOrFloat::class],
-        ],
-        'getBlockTransactionCountByNumber' => [
-            [],
-            [HexToIntOrFloat::class],
-        ],
+
         'getUncleCountByBlockHash' => [
             [],
             [HexToIntOrFloat::class],
@@ -161,14 +178,7 @@ final class Eth
             [],
             [],
         ],
-        'call' => [
-            [],
-            [],
-        ],
-        'estimateGas' => [
-            [],
-            [HexToIntOrFloat::class],
-        ],
+
         'submitWork' => [
             [],
             [],

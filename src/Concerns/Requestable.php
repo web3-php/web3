@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Web3\Concerns;
 
+use Web3\Contracts\Formatter;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
@@ -36,9 +37,27 @@ trait Requestable
             $params = $params[0];
         }
 
-        return $this->transporter->request(
+        if (array_key_exists($method, $this::$api)) {
+            foreach ($params as $number => $param) {
+                foreach ($this::$api[$method][0][$number] as $formatter) {
+                    /* @var Formatter<array<array-key, mixed>|string|bool> $formatter */
+                    $params[$number] = $formatter::format($param);
+                }
+            }
+        }
+
+        $result = $this->transporter->request(
             sprintf('%s_%s', strtolower(basename(str_replace('\\', '/', $this::class))), $method),
             $params,
         );
+
+        if (array_key_exists($method, $this::$api)) {
+            foreach ($this::$api[$method][1] as $formatter) {
+                /** @var Formatter<array<array-key, mixed>|string|bool> $formatter */
+                $result = $formatter::format($result);
+            }
+        }
+
+        return $result;
     }
 }

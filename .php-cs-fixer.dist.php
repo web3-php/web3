@@ -8,6 +8,7 @@ $finder = PhpCsFixer\Finder::create()
 $rules = [
     '@Symfony'               => true,
     'phpdoc_no_empty_return' => false,
+    'phpdoc_types_order'     => false,
     'array_syntax'           => ['syntax' => 'short'],
     'yoda_style'             => false,
     'binary_operator_spaces' => [

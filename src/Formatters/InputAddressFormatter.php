@@ -14,11 +14,9 @@ use Web3\Contracts\Formatter;
 final class InputAddressFormatter implements Formatter
 {
     /**
-     * @param string $value
-     *
-     * @return string
+     * {@inheritDoc}
      */
-    public static function format(mixed $value): mixed
+    public static function format(string $value): string
     {
         return $value;
     }

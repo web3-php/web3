@@ -7,16 +7,11 @@ namespace Web3\Contracts;
 /**
  * @template TValue
  *
+ * @method static TValue format(TValue $value)
+ *
  * @internal
  */
 interface Formatter
 {
-    /**
-     * Formats the given value.
-     *
-     * @param TValue $value
-     *
-     * @return TValue
-     */
-    public static function format(mixed $value): mixed;
+    // ..
 }

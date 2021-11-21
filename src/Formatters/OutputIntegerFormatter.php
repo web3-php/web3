@@ -15,12 +15,8 @@ final class OutputIntegerFormatter implements Formatter
 {
     /**
      * {@inheritDoc}
-     *
-     * @param string $value
-     *
-     * @return string
      */
-    public static function format(mixed $value): mixed
+    public static function format(string $value): string
     {
         return (string) hexdec($value);
     }

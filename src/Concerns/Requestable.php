@@ -53,7 +53,8 @@ trait Requestable
             $params,
         );
 
-        if (array_key_exists($method, $this::$api)) {
+        if (array_key_exists($method, $this::$api)
+            && array_key_exists(1, $this::$api[$method])) {
             foreach ($this::$api[$method][1] as $formatter) {
                 /** @var Formatter<array<array-key, mixed>|string|bool> $formatter */
                 $result = $formatter::format($result);

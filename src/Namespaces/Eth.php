@@ -91,7 +91,7 @@ final class Eth
         ],
         'gasPrice' => [
             [],
-            [HexToIntOrFloat::class],
+            [HexToWei::class],
         ],
         'feeHistory' => [
             [],

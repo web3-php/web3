@@ -39,9 +39,11 @@ trait Requestable
 
         if (array_key_exists($method, $this::$api)) {
             foreach ($params as $number => $param) {
-                foreach ($this::$api[$method][0][$number] as $formatter) {
-                    /* @var Formatter<array<array-key, mixed>|string|bool> $formatter */
-                    $params[$number] = $formatter::format($param);
+                if (array_key_exists($number, $this::$api[$method][0])) {
+                    foreach ($this::$api[$method][0][$number] as $formatter) {
+                        /* @var Formatter<array<array-key, mixed>|string|bool> $formatter */
+                        $params[$number] = $formatter::format($param);
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@
 /.php-cs-fixer.cache
 /.php-cs-fixer.php
 /composer.lock
+/playground
 /phpunit.xml
 /vendor/
 *.swp

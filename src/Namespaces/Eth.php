@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Web3\Namespaces;
 
 use Web3\Concerns\Requestable;
-use Web3\Formatters\InputAddressFormatter;
-use Web3\Formatters\OutputIntegerFormatter;
+use Web3\Formatters\HexToIntOrFloat;
 
 /**
  * @method string     protocolVersion()
@@ -68,12 +67,137 @@ final class Eth
      * @todo https://github.com/ChainSafe/web3.js/blob/a1c7d71973ec17f9287fbea8939e64a80e589fc6/packages/web3-eth/src/index.js#L369
      */
     private static array $api = [
+        'protocolVersion' => [
+            [],
+            [],
+        ],
+        'coinbase' => [
+            [],
+            [],
+        ],
+        'mining' => [
+            [],
+            [],
+        ],
+        'hashrate' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'syncing' => [
+            [],
+            [],
+        ],
+        'gasPrice' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'feeHistory' => [
+            [],
+            [],
+        ],
+        'accounts' => [
+            [],
+            [],
+        ],
+        'blockNumber' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
         'getBalance' => [
-            [
-                [InputAddressFormatter::class],
-                [],
-            ],
-            [OutputIntegerFormatter::class],
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getStorageAt' => [
+            [],
+            [],
+        ],
+        'getCode' => [
+            [],
+            [],
+        ],
+        'getTransactionByHash' => [
+            [],
+            [],
+        ],
+        'getTransactionReceipt' => [
+            [],
+            [],
+        ],
+        'getTransactionCount' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getBlockTransactionCountByHash' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getBlockTransactionCountByNumber' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getUncleCountByBlockHash' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'getUncleCountByBlockNumber' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'sendRawTransaction' => [
+            [],
+            [],
+        ],
+        'signTransaction' => [
+            [],
+            [],
+        ],
+        'sendTransaction' => [
+            [],
+            [],
+        ],
+        'sign' => [
+            [],
+            [],
+        ],
+        'call' => [
+            [],
+            [],
+        ],
+        'estimateGas' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'submitWork' => [
+            [],
+            [],
+        ],
+        'getWork' => [
+            [],
+            [],
+        ],
+        'getLogs' => [
+            [],
+            [],
+        ],
+        'chainId' => [
+            [],
+            [HexToIntOrFloat::class],
+        ],
+        'requestAccounts' => [
+            [],
+            [],
+        ],
+        'getProof' => [
+            [],
+            [],
+        ],
+        'pendingTransactions' => [
+            [],
+            [],
+        ],
+        'createAccessList' => [
+            [],
+            [],
         ],
     ];
 }

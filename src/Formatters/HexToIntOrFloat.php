@@ -11,7 +11,7 @@ use Web3\Contracts\Formatter;
  *
  * @implements Formatter<string>
  */
-final class OutputIntegerFormatter implements Formatter
+final class HexToIntOrFloat implements Formatter
 {
     /**
      * {@inheritDoc}

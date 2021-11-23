@@ -47,5 +47,4 @@ it('infers "http" from an ip address', function () {
     $url = $property->getValue($transporter);
 
     expect($url)->toBe('http://127.0.0.1:8545');
-
 });

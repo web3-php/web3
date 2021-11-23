@@ -46,7 +46,6 @@ final class Eth
     {
         $result = $this->transporter->request('eth_gasPrice');
 
-        /** @var string $result */
         assert(is_string($result));
 
         return HexToWei::format($result);

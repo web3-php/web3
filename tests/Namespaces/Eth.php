@@ -21,11 +21,11 @@ test('client version', function () {
         ->toBe([('0x407d73d8a49eeb85d32cf465507dd71d507100c1')]);
 });
 
-it('retrieves the current gas price in Wei', function () {
+test('gas price', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_gasPrice'
     )->once()->andReturn('0x400');
 
-    expect($this->eth->gasPrice())
-        ->toEqual(HexToWei::format('0x400'));
+    expect($this->eth->gasPrice()->value())
+        ->toBe('1024');
 });

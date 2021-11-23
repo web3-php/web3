@@ -20,8 +20,6 @@ final class HexToInt implements Formatter
     {
         $value = hexdec($value);
 
-        assert(is_int($value));
-
-        return $value;
+        return (int) $value;
     }
 }

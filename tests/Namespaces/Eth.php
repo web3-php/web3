@@ -1,7 +1,6 @@
 <?php
 
 use Web3\Contracts\Transporter;
-use Web3\Formatters\HexToWei;
 use Web3\Namespaces\Eth;
 
 beforeEach(function () {
@@ -18,7 +17,7 @@ test('client version', function () {
     ]);
 
     expect($this->eth->accounts())
-        ->toBe([('0x407d73d8a49eeb85d32cf465507dd71d507100c1')]);
+        ->toBe(['0x407d73d8a49eeb85d32cf465507dd71d507100c1']);
 });
 
 test('gas price', function () {
@@ -27,5 +26,20 @@ test('gas price', function () {
     )->once()->andReturn('0x400');
 
     expect($this->eth->gasPrice()->value())
+        ->toBe('1024');
+});
+
+test('get balance', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_getBalance',
+        [
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+            'latest',
+        ]
+    )->once()->andReturn(
+        '0x400',
+    );
+
+    expect($this->eth->getBalance('0x407d73d8a49eeb85d32cf465507dd71d507100c1')->value())
         ->toBe('1024');
 });

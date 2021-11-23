@@ -50,4 +50,21 @@ final class Eth
 
         return HexToWei::format($result);
     }
+
+    /**
+     * Returns the balance of an address in wei.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getBalance(string $address, string $defaultBlock = null): Wei
+    {
+        $result = $this->transporter->request('eth_getBalance', [
+            $address,
+            $defaultBlock ?: 'latest',
+        ]);
+
+        assert(is_string($result));
+
+        return HexToWei::format($result);
+    }
 }

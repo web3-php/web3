@@ -7,6 +7,8 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
+use Web3\Formatters\HexToWei;
+use Web3\ValueObjects\Wei;
 
 final class Eth
 {
@@ -33,5 +35,20 @@ final class Eth
         assert(is_array($result));
 
         return $result;
+    }
+
+    /**
+     * Returns the current price of gas in wei.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function gasPrice(): Wei
+    {
+        $result = $this->transporter->request('eth_gasPrice');
+
+        /** @var string $result */
+        assert(is_string($result));
+
+        return HexToWei::format($result);
     }
 }

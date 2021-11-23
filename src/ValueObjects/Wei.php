@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Web3\ValueObjects;
 
 use Stringable;
-use Web3\Formatters\HexToInt;
+use Web3\Formatters\HexToUnsignedIntegerAsString;
 
 final class Wei implements Stringable
 {
@@ -22,7 +22,7 @@ final class Wei implements Stringable
      */
     public static function fromHex(string $hex): self
     {
-        $value = HexToInt::format($hex);
+        $value = HexToUnsignedIntegerAsString::format($hex);
 
         return new self((string) $value);
     }
@@ -104,7 +104,7 @@ final class Wei implements Stringable
      */
     public function toString(): string
     {
-        return (string) $this->value();
+        return $this->value();
     }
 
     /**
@@ -120,18 +120,16 @@ final class Wei implements Stringable
      */
     private function format(int $multiplier): string
     {
-        $value = number_format(
-            (int) ($this->value()) / $multiplier,
-            strlen((string) $multiplier),
-            '.',
-            ''
-        );
+        $scale = strlen((string) $multiplier);
+
+        $value = bcdiv($this->value, (string) $multiplier, $scale);
+
+        assert(is_string($value));
 
         if (str_contains($value, '.')) {
             $value = rtrim($value, '0');
-            $value = rtrim($value, '.');
         }
 
-        return $value;
+        return rtrim($value, '.');
     }
 }

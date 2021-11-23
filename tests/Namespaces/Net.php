@@ -24,7 +24,7 @@ test('peer count', function () {
     )->once()->andReturn('0xA');
 
     expect($this->net->peerCount())
-        ->toBe(10);
+        ->toBe('10');
 });
 
 test('version', function () {

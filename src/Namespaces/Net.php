@@ -7,7 +7,7 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
-use Web3\Formatters\HexToInt;
+use Web3\Formatters\HexToUnsignedIntegerAsString;
 
 final class Net
 {
@@ -38,13 +38,13 @@ final class Net
      *
      * @throws ErrorException|TransporterException
      */
-    public function peerCount(): int
+    public function peerCount(): string
     {
         $result = $this->transporter->request('net_peerCount');
 
         assert(is_string($result));
 
-        return HexToInt::format($result);
+        return HexToUnsignedIntegerAsString::format($result);
     }
 
     /**

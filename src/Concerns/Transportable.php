@@ -30,6 +30,10 @@ trait Transportable
             return $this->transporter;
         }
 
+        if (str_starts_with($this->url, '127')) {
+            $this->transporter = new Http(new Client(), sprintf('http://%s', $this->url));
+        }
+
         if (str_starts_with($this->url, 'http')) {
             $this->transporter = new Http(new Client(), $this->url);
         }

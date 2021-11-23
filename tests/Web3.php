@@ -32,3 +32,20 @@ it('attemps the create the transporter based on the url', function () {
 
     $web3->clientVersion();
 })->throws(InvalidUrlException::class, 'The given url must start by "http".');
+
+it('infers "http" from an ip address', function () {
+    $web3 = new Web3('127.0.0.1:8545');
+
+    $reflection = new ReflectionClass($web3);
+    $method = $reflection->getMethod('getTransporter');
+    $method->setAccessible(true);
+    $transporter = $method->invoke($web3);
+
+    $reflection = new ReflectionClass($transporter);
+    $property = $reflection->getProperty('url');
+    $property->setAccessible(true);
+    $url = $property->getValue($transporter);
+
+    expect($url)->toBe('http://127.0.0.1:8545');
+
+});

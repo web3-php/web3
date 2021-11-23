@@ -9,17 +9,13 @@ beforeEach(function () {
     $this->eth = new Eth($this->transporter);
 });
 
-it('can make requests', function () {
+test('client version', function () {
     $this->transporter->shouldReceive('request')->with(
-        'eth_getBalance',
-        [
-            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
-            'latest',
-        ]
-    )->once()->andReturn('0x0234c8a3397aab58');
-
-    expect($this->eth->getBalance([
+        'eth_accounts'
+    )->once()->andReturn([
         '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
-        'latest',
-    ])->toWei())->toBe('158972490234375000');
+    ]);
+
+    expect($this->eth->accounts())
+        ->toBe([('0x407d73d8a49eeb85d32cf465507dd71d507100c1')]);
 });

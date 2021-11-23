@@ -9,10 +9,29 @@ beforeEach(function () {
     $this->net = new Net($this->transporter);
 });
 
-it('can make requests', function () {
+test('listening', function () {
     $this->transporter->shouldReceive('request')->with(
-        'net_listening', [],
+        'net_listening'
     )->once()->andReturn(true);
 
-    expect($this->net->listening())->toBeTrue();
+    expect($this->net->listening())
+        ->toBeTrue();
+});
+
+test('peer count', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'net_peerCount'
+    )->once()->andReturn('0xA');
+
+    expect($this->net->peerCount())
+        ->toBe(10);
+});
+
+test('version', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'net_version'
+    )->once()->andReturn('1');
+
+    expect($this->net->version())
+        ->toBe('1');
 });

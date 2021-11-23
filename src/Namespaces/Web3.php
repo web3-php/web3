@@ -4,24 +4,48 @@ declare(strict_types=1);
 
 namespace Web3\Namespaces;
 
-use Web3\Concerns\Requestable;
+use Web3\Contracts\Transporter;
+use Web3\Exceptions\ErrorException;
+use Web3\Exceptions\TransporterException;
+use Web3\Formatters\StringToHex;
 
-/**
- * @method string clientVersion()
- * @method string sha3(array $params)
- *
- * @internal
- */
 final class Web3
 {
-    use Requestable;
+    /**
+     * Creates a new Web3 instance.
+     */
+    public function __construct(private Transporter $transporter)
+    {
+        // ..
+    }
 
     /**
-     * The Namespace Formatters API.
+     * Returns the version of the current client.
      *
-     * @var array<string, array{0: array<int, array<int, class-string>>, 1: array<int, class-string>}>
-     *
-     * @todo https://github.com/ChainSafe/web3.js/blob/a1c7d71973ec17f9287fbea8939e64a80e589fc6/packages/web3-eth/src/index.js#L369
+     * @throws ErrorException|TransporterException
      */
-    private static array $api = [];
+    public function clientVersion(): string
+    {
+        $result = $this->transporter->request('web3_clientVersion');
+
+        assert(is_string($result));
+
+        return $result;
+    }
+
+    /**
+     * Hashes data using the Keccak-256 algorithm.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function sha3(string $data): string
+    {
+        $data = StringToHex::format($data);
+
+        $result = $this->transporter->request('web3_sha3', [$data]);
+
+        assert(is_string($result));
+
+        return $result;
+    }
 }

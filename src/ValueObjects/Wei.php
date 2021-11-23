@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Web3\ValueObjects;
 
 use Stringable;
-use Web3\Formatters\HexToIntOrFloat;
+use Web3\Formatters\HexToInt;
 
 final class Wei implements Stringable
 {
@@ -22,9 +22,9 @@ final class Wei implements Stringable
      */
     public static function fromHex(string $hex): self
     {
-        $value = HexToIntOrFloat::format($hex);
+        $value = HexToInt::format($hex);
 
-        return new self($value);
+        return new self((string) $value);
     }
 
     /**

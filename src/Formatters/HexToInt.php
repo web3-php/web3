@@ -11,13 +11,17 @@ use Web3\Contracts\Formatter;
  *
  * @implements Formatter<string, string>
  */
-final class HexToIntOrFloat implements Formatter
+final class HexToInt implements Formatter
 {
     /**
      * {@inheritDoc}
      */
-    public static function format(string $value): string
+    public static function format(string $value): int
     {
-        return (string) hexdec($value);
+        $value = hexdec($value);
+
+        assert(is_int($value));
+
+        return $value;
     }
 }

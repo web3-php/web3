@@ -26,7 +26,7 @@ final class Http implements Transporter
     /**
      * {@inheritDoc}
      */
-    public function request(string $method, array $params): array|string|bool
+    public function request(string $method, array $params = []): array|string|bool
     {
         $body = (string) json_encode([
             'jsonrpc' => '2.0',

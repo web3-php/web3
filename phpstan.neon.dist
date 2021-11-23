@@ -4,6 +4,3 @@ parameters:
         - src
 
     reportUnmatchedIgnoredErrors: true
-
-    ignoreErrors:
-        - '#api is never read, only written.#'

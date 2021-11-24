@@ -23,7 +23,7 @@ First, install Web3 via the [Composer](https://getcomposer.org/) package manager
 composer require web3-php/web3
 ```
 
-Then, use the `patrol` binary:
+Then, interact with a local or remote ethereum node:
 
 ```php
 use Web3\Web3;
@@ -50,7 +50,7 @@ $web3->clientVersion(); // TestRPC v2.13.2
 The `sha3` method hashes data using the Keccak-256 algorithm.
 
 ```php
-$web3->clientVersion(); // TestRPC v2.13.2
+$web3->sha3('string'); // 0x2bc897d8156dzd92f46392126434c0dedzb7ee31dcbcfc6s28
 ```
 
 ### `Eth` Namespace

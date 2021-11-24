@@ -71,7 +71,7 @@ final class Eth
 
 
     /**
-     * Returns whether the client is actively mining new blocks.
+     * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException
      */

@@ -63,6 +63,14 @@ The `accounts` method returns a list of addresses owned by this client.
 $web3->accounts(); // ['0x54a3259f4f693e4c1e9daa54eb116a0701edc403', ...]
 ```
 
+#### `chainId`
+
+The `chainId` method returns the current chain id.
+
+```php
+$web3->eth()->chainId(); // 1
+```
+
 #### `gasPrice`
 
 The `gasPrice` method returns the current price of gas in wei.

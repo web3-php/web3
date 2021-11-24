@@ -13,4 +13,98 @@
 
 > This project is a work-in-progress. Code and documentation are currently under development and are subject to change.
 
+## Get Started
+
+> **Requires [PHP 8.0+](https://php.net/releases/)**
+
+First, install Web3 via the [Composer](https://getcomposer.org/) package manager:
+
+```bash
+composer require web3-php/web3
+```
+
+Then, use the `patrol` binary:
+
+```php
+use Web3\Web3;
+
+$web3 = new Web3('http://127.0.0.1:8545');
+
+$accounts = $web3->eth()->accounts(); // ['0x54a3259f4f693e4c1e9daa54eb116a0701edc403', ...]
+```
+
+## Usage
+
+### `Web3` Namespace
+
+#### `clientVersion`
+
+The `clientVersion` method returns the version of the current client.
+
+```php
+$web3->clientVersion(); // TestRPC v2.13.2
+```
+
+#### `sha3`
+
+The `sha3` method hashes data using the Keccak-256 algorithm.
+
+```php
+$web3->clientVersion(); // TestRPC v2.13.2
+```
+
+### `Eth` Namespace
+
+#### `accounts`
+
+The `accounts` method returns a list of addresses owned by this client.
+
+```php
+$web3->accounts(); // ['0x54a3259f4f693e4c1e9daa54eb116a0701edc403', ...]
+```
+
+#### `gasPrice`
+
+The `gasPrice` method returns the current price of gas in wei.
+
+```php
+$web3->gasPrice()->toEth(); // 0.00000002
+```
+
+#### `getBalance`
+
+The `getBalance` method returns the balance of an address in wei.
+
+```php
+$web3->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
+```
+
+### `Net` Namespace
+
+#### `listening`
+
+The `listening` method determines if this client is listening for new network connections.
+
+```php
+$web3->net()->listening(); // true
+```
+
+#### `peerCount`
+
+The `peerCount` method returns the number of peers currently connected to this client.
+
+```php
+$web3->net()->peerCount(); // 230
+```
+
+#### `version`
+
+The `version` method returns the chain ID associated with the current network.
+
+```php
+$web3->net()->version(); // 1637712995212
+```
+
+---
+
 Web3 PHP is an open-sourced software licensed under the **[MIT license](https://opensource.org/licenses/MIT)**.

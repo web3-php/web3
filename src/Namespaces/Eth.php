@@ -51,6 +51,7 @@ final class Eth
         return HexToWei::format($result);
     }
 
+
     /**
      * Returns the balance of an address in wei.
      *
@@ -66,5 +67,20 @@ final class Eth
         assert(is_string($result));
 
         return HexToWei::format($result);
+    }
+
+
+    /**
+     * Returns whether the client is actively mining new blocks.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function isMining(): bool
+    {
+        $result = $this->transporter->request('eth_mining');
+
+        assert(is_bool($result));
+
+        return $result;
     }
 }

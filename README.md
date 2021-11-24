@@ -79,6 +79,11 @@ The `getBalance` method returns the balance of an address in wei.
 $web3->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
 ```
 
+#### `isMining`
+
+The `isMining()` method returns whether the client is actively mining new blocks.
+
+
 ### `Net` Namespace
 
 #### `listening`

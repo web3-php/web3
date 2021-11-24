@@ -43,3 +43,12 @@ test('get balance', function () {
     expect($this->eth->getBalance('0x407d73d8a49eeb85d32cf465507dd71d507100c1')->value())
         ->toBe('1024');
 });
+
+test('is mining', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_mining'
+    )->once()->andReturn(false);
+
+    expect($this->eth->isMining())
+        ->toBe(false);
+});

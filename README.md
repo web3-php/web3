@@ -81,7 +81,7 @@ $web3->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
 
 #### `isMining`
 
-The `isMining()` determines if the client is mining new blocks.
+The `isMining()` method determines if the client is mining new blocks.
 
 ```php
 $web3->eth()->isMining(); //true 

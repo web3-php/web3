@@ -53,6 +53,20 @@ test('get balance', function () {
         ->toBe('1024');
 });
 
+test('get block transaction count by hash', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_getBlockTransactionCountByHash',
+        [
+            '0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1',
+        ]
+    )->once()->andReturn(
+        '0x41',
+    );
+
+    expect($this->eth->getBlockTransactionCountByHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'))
+        ->toBe('65');
+});
+
 test('is mining', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_mining'

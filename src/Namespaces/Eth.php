@@ -84,6 +84,22 @@ final class Eth
     }
 
     /**
+     * Returns the number of transactions in a block by its hash.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getBlockTransactionCountByHash(string $blockHash): string
+    {
+        $result = $this->transporter->request('eth_getBlockTransactionCountByHash', [
+            $blockHash,
+        ]);
+
+        assert(is_string($result));
+
+        return HexToUnsignedIntegerAsString::format($result);
+    }
+
+    /**
      * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException

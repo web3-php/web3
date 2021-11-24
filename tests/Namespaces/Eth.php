@@ -9,7 +9,7 @@ beforeEach(function () {
     $this->eth = new Eth($this->transporter);
 });
 
-test('client version', function () {
+test('accounts', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_accounts'
     )->once()->andReturn([
@@ -18,6 +18,15 @@ test('client version', function () {
 
     expect($this->eth->accounts())
         ->toBe(['0x407d73d8a49eeb85d32cf465507dd71d507100c1']);
+});
+
+test('chain id', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_chainId'
+    )->once()->andReturn('0x1');
+
+    expect($this->eth->chainId())
+        ->toBe('1');
 });
 
 test('gas price', function () {

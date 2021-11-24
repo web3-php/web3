@@ -7,6 +7,7 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
+use Web3\Formatters\HexToUnsignedIntegerAsString;
 use Web3\Formatters\HexToWei;
 use Web3\ValueObjects\Wei;
 
@@ -35,6 +36,20 @@ final class Eth
         assert(is_array($result));
 
         return $result;
+    }
+
+    /**
+     * Returns the current chain id.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function chainId(): string
+    {
+        $result = $this->transporter->request('eth_chainId');
+
+        assert(is_string($result));
+
+        return HexToUnsignedIntegerAsString::format($result);
     }
 
     /**

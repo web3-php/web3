@@ -61,3 +61,12 @@ test('is mining', function () {
     expect($this->eth->isMining())
         ->toBe(false);
 });
+
+test('block number', function (){
+    $this->transporter->shouldReceive('request')->with(
+        'eth_blockNumber'
+    )->once()->andReturn('0xc94');
+
+    expect($this->eth->blockNumber())
+        ->toBe('3220');
+});

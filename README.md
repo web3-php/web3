@@ -95,6 +95,13 @@ The `isMining()` method determines if the client is mining new blocks.
 $web3->eth()->isMining(); //true 
 ```
 
+#### `blockNumber`
+
+The `blockNumber()` method returns the number (quantity) of the most recent block seen by this client.
+
+```php
+$web3->eth()->blockNumber(); // '3220' 
+```
 
 ### `Net` Namespace
 

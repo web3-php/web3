@@ -61,3 +61,12 @@ test('is mining', function () {
     expect($this->eth->isMining())
         ->toBe(false);
 });
+
+test('coinbase address', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_coinbase'
+    )->once()->andReturn('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
+
+    expect($this->eth->coinbase())
+        ->toBe('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
+});

@@ -96,4 +96,18 @@ final class Eth
 
         return $result;
     }
+
+    /**
+     * Returns the coinbase address of the client.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function coinbase(): string
+    {
+        $result = $this->transporter->request('eth_coinbase');
+
+        assert(is_string($result));
+
+        return $result;
+    }
 }

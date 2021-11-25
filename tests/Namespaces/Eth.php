@@ -62,6 +62,15 @@ test('is mining', function () {
         ->toBe(false);
 });
 
+test('block number', function (){
+    $this->transporter->shouldReceive('request')->with(
+        'eth_blockNumber'
+    )->once()->andReturn('0xc94');
+
+    expect($this->eth->blockNumber())
+        ->toBe('3220');
+});
+
 test('coinbase address', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_coinbase'

@@ -95,6 +95,14 @@ The `isMining()` method determines if the client is mining new blocks.
 $web3->eth()->isMining(); //true 
 ```
 
+#### `coinbase`
+
+The `coinbase()` method returns the Coinbase address of the client.
+
+```php
+$web3->eth()->coinbase(); // '0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e' 
+```
+
 
 ### `Net` Namespace
 

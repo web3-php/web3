@@ -66,7 +66,6 @@ final class Eth
         return HexToWei::format($result);
     }
 
-
     /**
      * Returns the balance of an address in wei.
      *
@@ -83,7 +82,6 @@ final class Eth
 
         return HexToWei::format($result);
     }
-
 
     /**
      * Determines if the client is mining new blocks.

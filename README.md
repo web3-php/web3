@@ -23,7 +23,7 @@ First, install Web3 via the [Composer](https://getcomposer.org/) package manager
 composer require web3-php/web3
 ```
 
-Then, interact with a local or remote ethereum node:
+Then, interact with a local (**[web3-php/cli](https://github.com/web3-php/cli)**) or remote ethereum node:
 
 ```php
 use Web3\Web3;

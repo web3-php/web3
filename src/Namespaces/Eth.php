@@ -100,6 +100,29 @@ final class Eth
     }
 
     /**
+     * Returns information about a transaction specified by hash.
+     *
+     * @return array<string, string>
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getTransactionByHash(string $transactionHash): array
+    {
+        $result = $this->transporter->request('eth_getTransactionByHash', [
+            $transactionHash,
+        ]);
+
+        /** @var array<string, string> $result */
+        assert(is_array($result));
+
+        foreach (['blockNumber', 'gas', 'gasPrice', 'nonce', 'transactionIndex', 'value', 'v'] as $key) {
+            $result[$key] = HexToUnsignedIntegerAsString::format($result[$key]);
+        }
+
+        return $result;
+    }
+
+    /**
      * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException

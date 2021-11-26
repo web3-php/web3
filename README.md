@@ -60,7 +60,7 @@ $web3->sha3('string'); // 0x2bc897d8156dzd92f46392126434c0dedzb7ee31dcbcfc6s28
 The `accounts` method returns a list of addresses owned by this client.
 
 ```php
-$web3->accounts(); // ['0x54a3259f4f693e4c1e9daa54eb116a0701edc403', ...]
+$web3->eth()->accounts(); // ['0x54a3259f4f693e4c1e9daa54eb116a0701edc403', ...]
 ```
 
 #### `chainId`
@@ -76,7 +76,7 @@ $web3->eth()->chainId(); // 1
 The `gasPrice` method returns the current price of gas in wei.
 
 ```php
-$web3->gasPrice()->toEth(); // 0.00000002
+$web3->eth()->gasPrice()->toEth(); // 0.00000002
 ```
 
 #### `getBalance`
@@ -84,7 +84,7 @@ $web3->gasPrice()->toEth(); // 0.00000002
 The `getBalance` method returns the balance of an address in wei.
 
 ```php
-$web3->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
+$web3->eth()->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
 ```
 
 #### `getBlockTransactionCountByHash`
@@ -92,7 +92,15 @@ $web3->getBalance('0x54a3259f4f693e4c1e9daa54eb116a0701edc403')->toEth(); // 100
 The `getBlockTransactionCountByHash` method returns the number of transactions in a block by its hash.
 
 ```php
-$web3->getBlockTransactionCountByHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'); // 266
+$web3->eth()->getBlockTransactionCountByHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'); // 266
+```
+
+#### `getTransactionByHash`
+
+The `getTransactionByHash` method returns information about a transaction by its hash.
+
+```php
+$web3->eth()->getTransactionByHash('0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b');
 ```
 
 #### `isMining`
@@ -100,7 +108,7 @@ $web3->getBlockTransactionCountByHash('0xd2a91777651a08b92d1d9fc701982c79da22495
 The `isMining()` method determines if the client is mining new blocks.
 
 ```php
-$web3->eth()->isMining(); //true 
+$web3->eth()->isMining(); // true 
 ```
 
 #### `blockNumber`

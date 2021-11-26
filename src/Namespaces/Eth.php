@@ -100,7 +100,7 @@ final class Eth
     }
 
     /**
-     * Returns information about a transaction specified by hash.
+     * Returns information about a transaction by its hash.
      *
      * @return array<string, string>
      *

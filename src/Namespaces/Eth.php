@@ -112,4 +112,32 @@ final class Eth
 
         return $result;
     }
+
+    /**
+     * Returns the number (quantity) of the most recent block seen by the client.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function blockNumber(): string
+    {
+        $result = $this->transporter->request('eth_blockNumber');
+
+        assert(is_string($result));
+
+        return HexToUnsignedIntegerAsString::format($result);
+    }
+
+    /**
+     * Returns the coinbase address of the client.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function coinbase(): string
+    {
+        $result = $this->transporter->request('eth_coinbase');
+
+        assert(is_string($result));
+
+        return $result;
+    }
 }

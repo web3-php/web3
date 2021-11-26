@@ -76,7 +76,7 @@ test('is mining', function () {
         ->toBe(false);
 });
 
-test('block number', function (){
+test('block number', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_blockNumber'
     )->once()->andReturn('0xc94');

@@ -28,6 +28,16 @@ final class Wei implements Stringable
     }
 
     /**
+     * Creates a new Wei instance, from the given eth value.
+     */
+    public static function fromEth(string $eth): self
+    {
+        $value = self::mul($eth, 1000000000000000000);
+
+        return new self($value);
+    }
+
+    /**
      * Gets the Wei's value.
      */
     public function value(): string
@@ -48,7 +58,7 @@ final class Wei implements Stringable
      */
     public function toKwei(): string
     {
-        return $this->format(1000);
+        return self::div($this->value, 1000);
     }
 
     /**
@@ -56,7 +66,7 @@ final class Wei implements Stringable
      */
     public function toMwei(): string
     {
-        return $this->format(1000000);
+        return self::div($this->value, 1000000);
     }
 
     /**
@@ -64,7 +74,7 @@ final class Wei implements Stringable
      */
     public function toGwei(): string
     {
-        return $this->format(1000000000);
+        return self::div($this->value, 1000000000);
     }
 
     /**
@@ -72,7 +82,7 @@ final class Wei implements Stringable
      */
     public function toMicroether(): string
     {
-        return $this->format(1000000000000);
+        return self::div($this->value, 1000000000000);
     }
 
     /**
@@ -80,15 +90,15 @@ final class Wei implements Stringable
      */
     public function toMilliether(): string
     {
-        return $this->format(1000000000000000);
+        return self::div($this->value, 1000000000000000);
     }
 
     /**
-     * Gets tWei's ther value.
+     * Gets tWei's ether value.
      */
     public function toEther(): string
     {
-        return $this->format(1000000000000000000);
+        return self::div($this->value, 1000000000000000000);
     }
 
     /**
@@ -116,16 +126,38 @@ final class Wei implements Stringable
     }
 
     /**
-     * Formats the current value by the given multiplier.
+     * Formats the current value by the given divider.
      */
-    private function format(int $multiplier): string
+    private static function div(string $value, int $divider): string
     {
-        $scale = strlen((string) $multiplier);
+        $scale = strlen((string) $divider);
 
-        $value = bcdiv($this->value, (string) $multiplier, $scale);
+        $value = bcdiv($value, (string) $divider, $scale);
 
         assert(is_string($value));
 
+        return self::format($value);
+    }
+
+    /**
+     * Formats the current value by the given multiplier.
+     */
+    private static function mul(string $value, int $multiplier): string
+    {
+        $scale = strlen((string) $multiplier);
+
+        $value = bcmul($value, (string) $multiplier, $scale);
+
+        assert(is_string($value));
+
+        return self::format($value);
+    }
+
+    /**
+     * Formats the given string, removing trailing zeros.
+     */
+    private static function format(string $value): string
+    {
         if (str_contains($value, '.')) {
             $value = rtrim($value, '0');
         }

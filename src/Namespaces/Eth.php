@@ -9,6 +9,7 @@ use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
 use Web3\Formatters\HexToUnsignedIntegerAsString;
 use Web3\Formatters\HexToWei;
+use Web3\ValueObjects\Transaction;
 use Web3\ValueObjects\Wei;
 
 final class Eth
@@ -158,6 +159,20 @@ final class Eth
     public function coinbase(): string
     {
         $result = $this->transporter->request('eth_coinbase');
+
+        assert(is_string($result));
+
+        return $result;
+    }
+
+    /**
+     * Creates, signs, and sends a new transaction to the network.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function sendTransaction(Transaction $transaction): string
+    {
+        $result = $this->transporter->request('eth_sendTransaction', $transaction->toArray());
 
         assert(is_string($result));
 

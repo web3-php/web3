@@ -127,6 +127,22 @@ The `coinbase()` method returns the Coinbase address of the client.
 $web3->eth()->coinbase(); // '0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e' 
 ```
 
+#### `sendTransaction`
+
+The `sendTransaction` method creates, signs, and sends a new transaction to the network.
+
+```php
+use Web3\ValueObjects\{Transaction, Wei};
+
+$from = '0xc9257b94da7f8eb07537db73a4ad0603cd83aba4';
+$to = '0x108d1089e4a737c0be63527a6e464564be948b03';
+$value = Wei::fromEth('1');
+
+$transaction = Transaction::between($from, $to)->withValue($value);
+
+$web3->eth()->sendTransaction($transaction); // '0xa124a7de5177cf5cedd3c44e91d115d0011f915905fa36fb7c000a491fa536ee' 
+```
+
 ### `Net` Namespace
 
 #### `listening`

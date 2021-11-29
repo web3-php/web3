@@ -7,7 +7,7 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
-use Web3\Formatters\HexToUnsignedIntegerAsString;
+use Web3\Formatters\HexToBigInteger;
 
 final class Net
 {
@@ -44,7 +44,7 @@ final class Net
 
         assert(is_string($result));
 
-        return HexToUnsignedIntegerAsString::format($result);
+        return HexToBigInteger::format($result);
     }
 
     /**

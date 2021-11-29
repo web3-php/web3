@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Web3\ValueObjects;
 
+use phpseclib3\Math\BigInteger;
 use Stringable;
-use Web3\Formatters\HexToUnsignedIntegerAsString;
+use Web3\Formatters\HexToBigInteger;
 
 final class Wei implements Stringable
 {
@@ -22,9 +23,9 @@ final class Wei implements Stringable
      */
     public static function fromHex(string $hex): self
     {
-        $value = HexToUnsignedIntegerAsString::format($hex);
+        $bigInteger = HexToBigInteger::format($hex);
 
-        return new self((string) $value);
+        return new self((string) $bigInteger);
     }
 
     /**
@@ -144,13 +145,9 @@ final class Wei implements Stringable
      */
     private static function mul(string $value, int $multiplier): string
     {
-        $scale = strlen((string) $multiplier);
+        $bigInteger = (new BigInteger($value))->multiply(new BigInteger($multiplier));
 
-        $value = bcmul($value, (string) $multiplier, $scale);
-
-        assert(is_string($value));
-
-        return self::format($value);
+        return self::format($bigInteger->toString());
     }
 
     /**

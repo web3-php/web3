@@ -7,7 +7,7 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
-use Web3\Formatters\HexToUnsignedIntegerAsString;
+use Web3\Formatters\HexToBigInteger;
 use Web3\Formatters\HexToWei;
 use Web3\ValueObjects\Transaction;
 use Web3\ValueObjects\Wei;
@@ -50,7 +50,7 @@ final class Eth
 
         assert(is_string($result));
 
-        return HexToUnsignedIntegerAsString::format($result);
+        return HexToBigInteger::format($result);
     }
 
     /**
@@ -97,7 +97,7 @@ final class Eth
 
         assert(is_string($result));
 
-        return HexToUnsignedIntegerAsString::format($result);
+        return HexToBigInteger::format($result);
     }
 
     /**
@@ -117,7 +117,7 @@ final class Eth
         assert(is_array($result));
 
         foreach (['blockNumber', 'gas', 'gasPrice', 'nonce', 'transactionIndex', 'value', 'v'] as $key) {
-            $result[$key] = HexToUnsignedIntegerAsString::format($result[$key]);
+            $result[$key] = HexToBigInteger::format($result[$key]);
         }
 
         return $result;
@@ -148,7 +148,7 @@ final class Eth
 
         assert(is_string($result));
 
-        return HexToUnsignedIntegerAsString::format($result);
+        return HexToBigInteger::format($result);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Web3\Formatters;
 
+use phpseclib3\Math\BigInteger;
 use Web3\Contracts\Formatter;
 
 /**
@@ -11,19 +12,19 @@ use Web3\Contracts\Formatter;
  *
  * @implements Formatter<string, string>
  */
-final class HexToUnsignedIntegerAsString implements Formatter
+final class BigIntegerToHex implements Formatter
 {
     /**
      * {@inheritDoc}
      */
     public static function format(string $value): string
     {
-        $value = hexdec($value);
-
-        if (is_int($value)) {
-            return (string) $value;
+        if (str_starts_with($value, '0x')) {
+            return $value;
         }
 
-        return number_format($value, 0, ',', '');
+        $bigInteger = new BigInteger($value);
+
+        return '0x' . $bigInteger->toHex();
     }
 }

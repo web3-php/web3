@@ -13,14 +13,14 @@
         "php": "^8.0",
         "ext-bcmath": "*",
         "guzzlehttp/guzzle": "^7.4.0",
-        "phpseclib/phpseclib": "^3.0"
+        "phpseclib/phpseclib": "^3.0.12"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.3.2",
         "mockery/mockery": "^1.4.4",
-        "pestphp/pest": "^1.21.0",
+        "pestphp/pest": "^1.21.1",
         "phpstan/phpstan": "^1.2.0",
-        "symfony/var-dumper": "^5.3.10"
+        "symfony/var-dumper": "^5.4.0"
     },
     "autoload": {
         "psr-4": {

@@ -2,6 +2,8 @@
 
 use Web3\Contracts\Transporter;
 use Web3\Namespaces\Eth;
+use Web3\ValueObjects\Transaction;
+use Web3\ValueObjects\Wei;
 
 beforeEach(function () {
     $this->transporter = Mockery::mock(Transporter::class);
@@ -135,5 +137,30 @@ test('coinbase address', function () {
     )->once()->andReturn('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
 
     expect($this->eth->coinbase())
+        ->toBe('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
+});
+
+test('send transaction', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_sendTransaction',
+        [
+            'from'     => '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
+            'to'       => '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
+            'value'    => '0x0f3dbb76162000',
+            'gas'      => '0xc350',
+            'gasPrice' => '0x04a817c800',
+            'nonce'    => '0x15',
+        ]
+    )->once()->andReturn('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
+
+    $transaction = Transaction::between(
+        '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
+        '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
+    )->withValue(new Wei('4290000000000000'))
+        ->withGas('50000')
+        ->withGasPrice(new Wei('20000000000'))
+        ->withNonce('21');
+
+    expect($this->eth->sendTransaction($transaction))
         ->toBe('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
 });

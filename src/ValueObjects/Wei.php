@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Web3\ValueObjects;
 
+use phpseclib3\Math\BigInteger;
 use Stringable;
-use Web3\Formatters\HexToUnsignedIntegerAsString;
+use Web3\Formatters\HexToBigInteger;
 
 final class Wei implements Stringable
 {
@@ -22,9 +23,19 @@ final class Wei implements Stringable
      */
     public static function fromHex(string $hex): self
     {
-        $value = HexToUnsignedIntegerAsString::format($hex);
+        $bigInteger = HexToBigInteger::format($hex);
 
-        return new self((string) $value);
+        return new self((string) $bigInteger);
+    }
+
+    /**
+     * Creates a new Wei instance, from the given eth value.
+     */
+    public static function fromEth(string $eth): self
+    {
+        $value = self::mul($eth, 1000000000000000000);
+
+        return new self($value);
     }
 
     /**
@@ -48,7 +59,7 @@ final class Wei implements Stringable
      */
     public function toKwei(): string
     {
-        return $this->format(1000);
+        return self::div($this->value, 1000);
     }
 
     /**
@@ -56,7 +67,7 @@ final class Wei implements Stringable
      */
     public function toMwei(): string
     {
-        return $this->format(1000000);
+        return self::div($this->value, 1000000);
     }
 
     /**
@@ -64,7 +75,7 @@ final class Wei implements Stringable
      */
     public function toGwei(): string
     {
-        return $this->format(1000000000);
+        return self::div($this->value, 1000000000);
     }
 
     /**
@@ -72,7 +83,7 @@ final class Wei implements Stringable
      */
     public function toMicroether(): string
     {
-        return $this->format(1000000000000);
+        return self::div($this->value, 1000000000000);
     }
 
     /**
@@ -80,15 +91,15 @@ final class Wei implements Stringable
      */
     public function toMilliether(): string
     {
-        return $this->format(1000000000000000);
+        return self::div($this->value, 1000000000000000);
     }
 
     /**
-     * Gets tWei's ther value.
+     * Gets tWei's ether value.
      */
     public function toEther(): string
     {
-        return $this->format(1000000000000000000);
+        return self::div($this->value, 1000000000000000000);
     }
 
     /**
@@ -116,16 +127,34 @@ final class Wei implements Stringable
     }
 
     /**
-     * Formats the current value by the given multiplier.
+     * Formats the current value by the given divider.
      */
-    private function format(int $multiplier): string
+    private static function div(string $value, int $divider): string
     {
-        $scale = strlen((string) $multiplier);
+        $scale = strlen((string) $divider);
 
-        $value = bcdiv($this->value, (string) $multiplier, $scale);
+        $value = bcdiv($value, (string) $divider, $scale);
 
         assert(is_string($value));
 
+        return self::format($value);
+    }
+
+    /**
+     * Formats the current value by the given multiplier.
+     */
+    private static function mul(string $value, int $multiplier): string
+    {
+        $bigInteger = (new BigInteger($value))->multiply(new BigInteger($multiplier));
+
+        return self::format($bigInteger->toString());
+    }
+
+    /**
+     * Formats the given string, removing trailing zeros.
+     */
+    private static function format(string $value): string
+    {
         if (str_contains($value, '.')) {
             $value = rtrim($value, '0');
         }

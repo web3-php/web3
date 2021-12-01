@@ -141,9 +141,14 @@ final class Eth
         assert(is_array($result));
 
         foreach (['blockNumber', 'cumulativeGasUsed', 'gasUsed', 'status', 'transactionIndex'] as $key) {
+            assert(is_string($result[$key]));
+            
             $result[$key] = HexToBigInteger::format($result[$key]);
         }
 
+        assert(is_array($result['logs']));
+
+        /** @var array<string, string> $log */
         foreach ($result['logs'] ?? [] as $logKey => $log) {
             foreach (['blockNumber', 'logIndex', 'transactionIndex'] as $key) {
                 $result['logs'][$logKey][$key] = HexToBigInteger::format($log[$key]);

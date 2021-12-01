@@ -124,6 +124,36 @@ final class Eth
     }
 
     /**
+     * Returns the receipt of a transaction by its hash.
+     * Note that the receipt is not available for pending transactions.
+     *
+     * @return array<string, string|array<string, string>>
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getTransactionReceipt(string $transactionHash): array
+    {
+        $result = $this->transporter->request('eth_getTransactionReceipt', [
+            $transactionHash,
+        ]);
+
+        /** @var array<string, string|array<string, string>> $result */
+        assert(is_array($result));
+
+        foreach (['blockNumber', 'cumulativeGasUsed', 'gasUsed', 'status', 'transactionIndex'] as $key) {
+            $result[$key] = HexToBigInteger::format($result[$key]);
+        }
+
+        foreach ($result['logs'] ?? [] as $logKey => $log) {
+            foreach (['blockNumber', 'logIndex', 'transactionIndex'] as $key) {
+                $result['logs'][$logKey][$key] = HexToBigInteger::format($log[$key]);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException

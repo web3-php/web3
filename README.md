@@ -103,6 +103,14 @@ The `getTransactionByHash` method returns information about a transaction by its
 $web3->eth()->getTransactionByHash('0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b');
 ```
 
+#### `getTransactionReceipt`
+
+The `getTransactionReceipt` method returns the receipt for a transaction by its hash.
+
+```php
+$web3->eth()->getTransactionReceipt('0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0');
+```
+
 #### `isMining`
 
 The `isMining()` method determines if the client is mining new blocks.

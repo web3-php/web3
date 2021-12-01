@@ -142,7 +142,7 @@ final class Eth
 
         foreach (['blockNumber', 'cumulativeGasUsed', 'gasUsed', 'status', 'transactionIndex'] as $key) {
             assert(is_string($result[$key]));
-            
+
             $result[$key] = HexToBigInteger::format($result[$key]);
         }
 

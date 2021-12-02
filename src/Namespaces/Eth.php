@@ -159,6 +159,22 @@ final class Eth
     }
 
     /**
+     * Returns the number of uncles in a block by its hash.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getUncleCountByBlockHash(string $blockHash): string
+    {
+        $result = $this->transporter->request('eth_getUncleCountByBlockHash', [
+            $blockHash,
+        ]);
+
+        assert(is_string($result));
+
+        return HexToBigInteger::format($result);
+    }
+
+    /**
      * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException

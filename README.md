@@ -111,6 +111,14 @@ The `getTransactionReceipt` method returns the receipt for a transaction by its 
 $web3->eth()->getTransactionReceipt('0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0');
 ```
 
+#### `getUncleCountByBlockHash`
+
+The `getUncleCountByBlockHash` method returns the number of uncles in a block by its hash.
+
+```php
+$web3->eth()->getUncleCountByBlockHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'); // 266
+```
+
 #### `isMining`
 
 The `isMining()` method determines if the client is mining new blocks.

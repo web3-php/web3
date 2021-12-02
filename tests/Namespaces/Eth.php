@@ -151,6 +151,20 @@ test('get transaction receipt', function () {
         ]);
 });
 
+test('get uncle count by block hash', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_getUncleCountByBlockHash',
+        [
+            '0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1',
+        ]
+    )->once()->andReturn(
+        '0x1',
+    );
+
+    expect($this->eth->getUncleCountByBlockHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'))
+        ->toBe('1');
+});
+
 test('is mining', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_mining'

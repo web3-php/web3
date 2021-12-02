@@ -175,6 +175,20 @@ final class Eth
     }
 
     /**
+     * Returns the number of hashes-per-second this node is mining at.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function hashrate(): string
+    {
+        $result = $this->transporter->request('eth_hashrate');
+
+        assert(is_string($result));
+
+        return HexToBigInteger::format($result);
+    }
+
+    /**
      * Determines if the client is mining new blocks.
      *
      * @throws ErrorException|TransporterException

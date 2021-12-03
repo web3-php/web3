@@ -119,6 +119,14 @@ The `getUncleCountByBlockHash` method returns the number of uncles in a block by
 $web3->eth()->getUncleCountByBlockHash('0xd2a91777651a08b92d1d9fc701982c79da2249532cfe41a773a340978f96b5d1'); // 266
 ```
 
+#### `hashrate`
+
+The `hashrate()` method returns the number of hashes-per-second this node is mining at.
+
+```php
+$web3->eth()->hashrate(); // '65' 
+```
+
 #### `isMining`
 
 The `isMining()` method determines if the client is mining new blocks.

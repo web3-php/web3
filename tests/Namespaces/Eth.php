@@ -165,6 +165,15 @@ test('get uncle count by block hash', function () {
         ->toBe('1');
 });
 
+test('hashrate', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_hashrate'
+    )->once()->andReturn('0x41');
+
+    expect($this->eth->hashrate())
+        ->toBe('65');
+});
+
 test('is mining', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_mining'

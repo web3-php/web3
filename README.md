@@ -167,6 +167,14 @@ $transaction = Transaction::between($from, $to)->withValue($value);
 $web3->eth()->sendTransaction($transaction); // '0xa124a7de5177cf5cedd3c44e91d115d0011f915905fa36fb7c000a491fa536ee' 
 ```
 
+#### `submitWork`
+
+The `submitWork()` method submits a proof-of-work solution, and returns a boolean based on the result.
+
+```php
+$web3->eth()->submitWork($nonce, $proofOfWorkHash, $mixDigest); // true 
+```
+
 ### `Net` Namespace
 
 #### `listening`

@@ -243,4 +243,22 @@ final class Eth
 
         return $result;
     }
+
+    /**
+     * Submit a proof-of-work solution.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function submitWork(string $nonce, string $proofOfWorkHash, string $mixDigest): bool
+    {
+        $result = $this->transporter->request('eth_submitWork', [
+            $nonce,
+            $proofOfWorkHash,
+            $mixDigest,
+        ]);
+
+        assert(is_bool($result));
+
+        return $result;
+    }
 }

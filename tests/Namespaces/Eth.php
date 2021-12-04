@@ -225,3 +225,12 @@ test('send transaction', function () {
     expect($this->eth->sendTransaction($transaction))
         ->toBe('0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e');
 });
+
+test('submit work', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_submitWork'
+    )->once()->andReturn(true);
+
+    expect($this->eth->submitWork())
+        ->toBe(true);
+});

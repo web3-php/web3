@@ -120,34 +120,34 @@ test('get transaction receipt', function () {
             '0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0',
         ]
     )->once()->andReturn([
-        'blockHash'                    => '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
-        'contractAddress'              => '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-        'from'                         => '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
-        'logsBloom'                    => '0xb903239f8543d04b5dc1ba6579132b143031c68db1b2168786408fcbce568239',
-        'to'                           => '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
-        'transactionHash'              => '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
-        'blockNumber'                  => '0xb',
-        'cumulativeGasUsed'            => '0x33bc',
-        'gasUsed'                      => '0x4dc',
-        'status'                       => '0x1',
-        'transactionIndex'             => '0x1',
-        'logs'                         => [],
+        'blockHash'         => '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+        'contractAddress'   => '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+        'from'              => '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
+        'logsBloom'         => '0xb903239f8543d04b5dc1ba6579132b143031c68db1b2168786408fcbce568239',
+        'to'                => '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
+        'transactionHash'   => '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
+        'blockNumber'       => '0xb',
+        'cumulativeGasUsed' => '0x33bc',
+        'gasUsed'           => '0x4dc',
+        'status'            => '0x1',
+        'transactionIndex'  => '0x1',
+        'logs'              => [],
     ]);
 
     expect($this->eth->getTransactionReceipt('0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0'))
         ->toBe([
-            'blockHash'                    => '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
-            'contractAddress'              => '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-            'from'                         => '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
-            'logsBloom'                    => '0xb903239f8543d04b5dc1ba6579132b143031c68db1b2168786408fcbce568239',
-            'to'                           => '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
-            'transactionHash'              => '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
-            'blockNumber'                  => '11',
-            'cumulativeGasUsed'            => '13244',
-            'gasUsed'                      => '1244',
-            'status'                       => '1',
-            'transactionIndex'             => '1',
-            'logs'                         => [],
+            'blockHash'         => '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+            'contractAddress'   => '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+            'from'              => '0xa7d9ddbe1f17865597fbd27ec712455208b6b76d',
+            'logsBloom'         => '0xb903239f8543d04b5dc1ba6579132b143031c68db1b2168786408fcbce568239',
+            'to'                => '0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb',
+            'transactionHash'   => '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
+            'blockNumber'       => '11',
+            'cumulativeGasUsed' => '13244',
+            'gasUsed'           => '1244',
+            'status'            => '1',
+            'transactionIndex'  => '1',
+            'logs'              => [],
         ]);
 });
 
@@ -228,9 +228,17 @@ test('send transaction', function () {
 
 test('submit work', function () {
     $this->transporter->shouldReceive('request')->with(
-        'eth_submitWork'
+        'eth_submitWork', [
+            '0x0000000000000001',
+            '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+            '0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000',
+        ]
     )->once()->andReturn(true);
 
-    expect($this->eth->submitWork())
+    expect($this->eth->submitWork(
+        '0x0000000000000001',
+        '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+        '0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000'
+    ))
         ->toBe(true);
 });

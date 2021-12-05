@@ -50,7 +50,7 @@ $web3->clientVersion(); // TestRPC v2.13.2
 The `sha3` method hashes data using the Keccak-256 algorithm.
 
 ```php
-$web3->sha3('string'); // 0x2bc897d8156dzd92f46392126434c0dedzb7ee31dcbcfc6s28
+$web3->sha3('string'); // 0x348ab0847d053bb0150c1eb3470a71071d2967e20cf131b59dea3df9bf8f753e
 ```
 
 ### `Eth` Namespace

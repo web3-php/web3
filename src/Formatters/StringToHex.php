@@ -18,7 +18,7 @@ final class StringToHex implements Formatter
      */
     public static function format(string $value): string
     {
-        if (str_starts_with($value, '0x')) {
+        if (str_starts_with($value, '0x') && ctype_xdigit(substr($value, 2))) {
             return $value;
         }
 

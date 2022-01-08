@@ -35,7 +35,12 @@ final class Http implements Transporter
             'params'  => $params,
         ]);
 
-        $request = new Request('POST', $this->url, [], $body);
+        $headers = [
+            'Content-Type'   => 'application/json',
+            'Content-Length' => strlen($body),
+        ];
+
+        $request = new Request('POST', $this->url, $headers, $body);
 
         try {
             $contents = $this->client->sendRequest($request)->getBody()->getContents();

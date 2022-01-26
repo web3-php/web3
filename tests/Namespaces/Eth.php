@@ -69,6 +69,20 @@ test('get block transaction count by hash', function () {
         ->toBe('65');
 });
 
+test('get block transaction count by number', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_getBlockTransactionCountByNumber',
+        [
+            'latest',
+        ]
+    )->once()->andReturn(
+        '0x41',
+    );
+
+    expect($this->eth->getBlockTransactionCountByNumber('latest'))
+        ->toBe('65');
+});
+
 test('get transaction by hash', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_getTransactionByHash',

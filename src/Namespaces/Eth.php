@@ -7,6 +7,7 @@ namespace Web3\Namespaces;
 use Web3\Contracts\Transporter;
 use Web3\Exceptions\ErrorException;
 use Web3\Exceptions\TransporterException;
+use Web3\Formatters\BigIntegerToHex;
 use Web3\Formatters\HexToBigInteger;
 use Web3\Formatters\HexToWei;
 use Web3\ValueObjects\Transaction;
@@ -93,6 +94,26 @@ final class Eth
     {
         $result = $this->transporter->request('eth_getBlockTransactionCountByHash', [
             $blockHash,
+        ]);
+
+        assert(is_string($result));
+
+        return HexToBigInteger::format($result);
+    }
+
+    /**
+     * Returns the number of transactions in a block by its number or identifier.
+     *
+     * @throws ErrorException|TransporterException
+     */
+    public function getBlockTransactionCountByNumber(string|int $blockIdentifier): string
+    {
+        if (is_int($blockIdentifier)) {
+            $blockIdentifier = BigIntegerToHex::format((string) $blockIdentifier);
+        }
+
+        $result = $this->transporter->request('eth_getBlockTransactionCountByNumber', [
+            $blockIdentifier,
         ]);
 
         assert(is_string($result));

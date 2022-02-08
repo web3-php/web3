@@ -20,7 +20,7 @@
 First, install Web3 via the [Composer](https://getcomposer.org/) package manager:
 
 ```bash
-composer require web3-php/web3
+composer require web3-php/web3 dev-master
 ```
 
 Then, interact with a local (**[web3-php/cli](https://github.com/web3-php/cli)**) or remote ethereum node:

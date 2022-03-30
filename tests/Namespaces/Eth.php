@@ -260,7 +260,7 @@ test('submit work', function () {
 test('get logs', function () {
     $this->transporter->shouldReceive('request')->with(
         'eth_getLogs',
-        []
+        [[]]
     )->once()->andReturn([
         [
             "address" => "0x1a94fce7ef36bc90959e206ba569a12afbc91ca1",

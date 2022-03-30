@@ -249,7 +249,7 @@ final class Eth
     {
         FilterObject::validate($filterObject);
 
-        $result = $this->transporter->request('eth_getLogs', $filterObject);
+        $result = $this->transporter->request('eth_getLogs', [$filterObject]);
 
         /** @var array<string, string|array<string>> $result */
         assert(is_array($result));

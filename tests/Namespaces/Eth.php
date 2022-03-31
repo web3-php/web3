@@ -256,3 +256,67 @@ test('submit work', function () {
     ))
         ->toBe(true);
 });
+
+test('get logs', function () {
+    $this->transporter->shouldReceive('request')->with(
+        'eth_getLogs',
+        [[]]
+    )->once()->andReturn([
+        [
+            "address" => "0x1a94fce7ef36bc90959e206ba569a12afbc91ca1",
+            "blockHash" => "0x7c5a35e9cb3e8ae0e221ab470abae9d446c3a5626ce6689fc777dcffcab52c70",
+            "blockNumber" => "0x5c29fb",
+            "data" => "0x0000000000000000000000003e3310720058c51f0de456e273c626cdd35065700000000000000000000000000000000000000000000000000000000000003185000000000000000000000000000000000000000000000000000000000000318200000000000000000000000000000000000000000000000000000000005c2a23",
+            "logIndex" => "0x1d",
+            "removed" => false,
+            "topics" => [
+                "0x241ea03ca20251805084d27d4440371c34a0b85ff108f6bb5611248f73818b80"
+            ],
+            "transactionHash" => "0x3dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50",
+            "transactionIndex" => "0x1d"
+        ],
+        [
+            "address" => "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+            "blockHash" => "0x7c5a35e9cb3e8ae0e221ab470abae9d446c3a5626ce6689fc777dcffcab52c70",
+            "blockNumber" => "0x5c29fb",
+            "data" => "0x00000000000000000000000077ea137625739598666ded665953d26b3d8e374400000000000000000000000000000000000000000000000000000000000749ff00000000000000000000000000000000000000000000000000000000000a749d00000000000000000000000000000000000000000000000000000000005c2a0f",
+            "logIndex" => "0x57",
+            "removed" => false,
+            "topics" => [
+                "0x241ea03ca20251805084d27d4440371c34a0b85ff108f6bb5611248f73818b80"
+            ],
+            "transactionHash" => "0x788b1442414cb9c9a36dba2abe250763161a6f6395788a2e808f1b34e92beec1",
+            "transactionIndex" => "0x54"
+        ]
+    ]);
+
+    expect($this->eth->getLogs([]))
+        ->toBe([
+            [
+                "address" => "0x1a94fce7ef36bc90959e206ba569a12afbc91ca1",
+                "blockHash" => "0x7c5a35e9cb3e8ae0e221ab470abae9d446c3a5626ce6689fc777dcffcab52c70",
+                "blockNumber" => "6040059",
+                "data" => "0x0000000000000000000000003e3310720058c51f0de456e273c626cdd35065700000000000000000000000000000000000000000000000000000000000003185000000000000000000000000000000000000000000000000000000000000318200000000000000000000000000000000000000000000000000000000005c2a23",
+                "logIndex" => "29",
+                "removed" => false,
+                "topics" => [
+                    "0x241ea03ca20251805084d27d4440371c34a0b85ff108f6bb5611248f73818b80"
+                ],
+                "transactionHash" => "0x3dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50",
+                "transactionIndex" => "29"
+            ],
+            [
+                "address" => "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+                "blockHash" => "0x7c5a35e9cb3e8ae0e221ab470abae9d446c3a5626ce6689fc777dcffcab52c70",
+                "blockNumber" => "6040059",
+                "data" => "0x00000000000000000000000077ea137625739598666ded665953d26b3d8e374400000000000000000000000000000000000000000000000000000000000749ff00000000000000000000000000000000000000000000000000000000000a749d00000000000000000000000000000000000000000000000000000000005c2a0f",
+                "logIndex" => "87",
+                "removed" => false,
+                "topics" => [
+                    "0x241ea03ca20251805084d27d4440371c34a0b85ff108f6bb5611248f73818b80"
+                ],
+                "transactionHash" => "0x788b1442414cb9c9a36dba2abe250763161a6f6395788a2e808f1b34e92beec1",
+                "transactionIndex" => "84"
+            ]
+        ]);
+});

@@ -10,6 +10,7 @@ use Web3\Exceptions\TransporterException;
 use Web3\Formatters\BigIntegerToHex;
 use Web3\Formatters\HexToBigInteger;
 use Web3\Formatters\HexToWei;
+use Web3\Validators\FilterObject;
 use Web3\ValueObjects\Transaction;
 use Web3\ValueObjects\Wei;
 
@@ -235,6 +236,42 @@ final class Eth
         assert(is_string($result));
 
         return HexToBigInteger::format($result);
+    }
+
+    /**
+     * Returns an array of all logs matching a given filter object.
+     *
+     * @see https://docs.infura.io/infura/networks/ethereum/json-rpc-methods/eth_getlogs
+     * @throws ErrorException|TransporterException
+     * @return array<array<string,string|array<string>>>
+     */
+    public function getLogs($filterObject = []): array
+    {
+        FilterObject::validate($filterObject);
+
+        // Accept decimal
+        if (isset($filterObject['fromBlock']) && is_int($filterObject['fromBlock'])) {
+            $filterObject['fromBlock'] = BigIntegerToHex::format((string) $filterObject['fromBlock']);
+        }
+        if (isset($filterObject['toBlock']) && is_int($filterObject['toBlock'])) {
+            $filterObject['toBlock'] = BigIntegerToHex::format((string) $filterObject['toBlock']);
+        }
+
+        $params = empty($filterObject) ? [] : [$filterObject];
+
+        $result = $this->transporter->request('eth_getLogs', $params);
+
+        /** @var array<array<string, string|array<string>>> $result */
+        assert(is_array($result));
+
+        /** @var array<string, string|array<string> $log */
+        foreach ($result as $logKey => $log) {
+            foreach (['blockNumber', 'logIndex', 'transactionIndex'] as $key) {
+                $result[$logKey][$key] = HexToBigInteger::format($log[$key]);
+            }
+        }
+
+        return $result;
     }
 
     /**

@@ -243,7 +243,7 @@ final class Eth
      *
      * @see https://docs.infura.io/infura/networks/ethereum/json-rpc-methods/eth_getlogs
      * @throws ErrorException|TransporterException
-     * @return array<string,string>
+     * @return array<array<string,string|array<string>>>
      */
     public function getLogs($filterObject = []): array
     {
@@ -261,10 +261,10 @@ final class Eth
 
         $result = $this->transporter->request('eth_getLogs', $params);
 
-        /** @var array<string, string|array<string>> $result */
+        /** @var array<array<string, string|array<string>>> $result */
         assert(is_array($result));
 
-        /** @var array<string, string> $log */
+        /** @var array<string, string|array<string> $log */
         foreach ($result as $logKey => $log) {
             foreach (['blockNumber', 'logIndex', 'transactionIndex'] as $key) {
                 $result[$logKey][$key] = HexToBigInteger::format($log[$key]);
